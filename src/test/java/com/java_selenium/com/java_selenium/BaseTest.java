@@ -13,6 +13,8 @@ public class BaseTest {
 	WebDriver driver = new ChromeDriver();
 	System.out.println("Hello");
 	driver.get("https://www.google.com/");
+	driver.close();
+	driver.quit();
 
 }
 }
