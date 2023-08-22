@@ -1,11 +1,12 @@
 package com.java_selenium.com.java_selenium;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class BaseTest {
+public class BaseTest{
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 	String Path = System.getProperty("user.dir");
 	System.out.println(Path);
@@ -13,7 +14,12 @@ public class BaseTest {
 	WebDriver driver = new ChromeDriver();
 	System.out.println("Hello");
 	driver.get("https://www.google.com/");
-	driver.close();
+	Page_Objects1 ob = new Page_Objects1(driver);
+	ob.search_box.sendKeys("Football");
+	ob.search_box.sendKeys(Keys.ENTER);
+	System.out.println(driver.getTitle());
+	Thread.sleep(5000);
+	//driver.close();
 	driver.quit();
 
 }
