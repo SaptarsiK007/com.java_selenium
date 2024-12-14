@@ -1,5 +1,6 @@
 package com.java_selenium.com.java_selenium;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import org.apache.poi.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,6 +15,7 @@ public class ReadData {
 	static XSSFWorkbook wb;
 	static XSSFSheet sheet;
 	static int rowCount;
+	static int index;
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -27,11 +29,17 @@ public class ReadData {
 	//System.out.println(sheet.getRow(1).getCell(1));
 	String test = "TC001";
 	rowCount = sheet.getLastRowNum();
-	//System.out.println(rowCount);
-	
+	System.out.println(rowCount);
+	// index is first column
+	index=2;
 	ReadData ob = new ReadData();
-	String Testdata = ob.GetData("TC003","Keyword2");
-	System.out.println(Testdata);
+	//String Testdata = ob.GetData("TC001","Keyword1");
+	//System.out.println(Testdata);
+	for(int i=0;i<10;i++) 
+	{
+	ob.PutData("TC001", "Newdata",index);
+	index++;
+	}
 	}
 	
 	public String GetData(String test1,String test2 )
@@ -41,6 +49,34 @@ public class ReadData {
 		String data = sheet.getRow(x).getCell(y).toString();
 		
 		return data;
+	}
+	
+	public void PutData(String test1, String test2, int colindex) 
+	{
+		
+		int x = returnrownum(test1);
+		//int y = returncolnum(test2);
+		System.out.println(x);
+		Row row = sheet.getRow(x);
+        //if (row == null) 
+          //  row = sheet.createRow(x);
+        
+
+        // Create the cell and set the value
+		
+        Cell cell = row.createCell(colindex);
+        cell.setCellValue(test2);
+
+        // Write the updated workbook back to the same file
+        String path = System.getProperty("user.dir");
+        try (FileOutputStream outputStream = new FileOutputStream(path+"\\src\\main\\TestData\\TestData.xlsx")) {
+            wb.write(outputStream);
+            //System.out.println("Data written to cell (" + x + ", " + "4" + ") in " + path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		
 	}
 	
 	

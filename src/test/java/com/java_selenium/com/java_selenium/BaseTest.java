@@ -1,12 +1,15 @@
 package com.java_selenium.com.java_selenium;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
 public class BaseTest{
 	
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	public void openBrowser() throws InterruptedException {
 		
 	String Path = System.getProperty("user.dir");
 	System.out.println(Path);
